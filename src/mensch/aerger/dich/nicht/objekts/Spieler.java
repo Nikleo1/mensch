@@ -7,6 +7,8 @@
 package mensch.aerger.dich.nicht.objekts;
 
 import java.awt.Color;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
@@ -15,6 +17,11 @@ import java.awt.Color;
 public class Spieler {
     private int id;
     private Color farbe;
+    private List<Figur> figuren;
+
+    public Spieler() {
+        figuren = new LinkedList<Figur>();
+    }
 
     public int getId() {
         return id;
@@ -28,6 +35,11 @@ public class Spieler {
         this.id = id;
         this.farbe = farbe;
     }
+
+    public List<Figur> getFiguren() {
+        return figuren;
+    }
+    
    
     
     
