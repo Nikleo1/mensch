@@ -8,10 +8,9 @@ package mensch.aerger.dich.nicht;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import mensch.aerger.dich.nicht.grafik.Grafikmanager;
-import mensch.aerger.dich.nicht.grafik.LinesComponent;
-import mensch.aerger.dich.nicht.objekts.Spielfelder.VierSpielerFeld;
-import mensch.aerger.dich.nicht.objekts.Wuerfel;
+import mensch.aerger.dich.nicht.view.Grafikmanager;
+import mensch.aerger.dich.nicht.modell.Spielfelder.VierSpielerFeld;
+import mensch.aerger.dich.nicht.view.LinesComponent;
 
 
 /**
@@ -67,29 +66,24 @@ public class MainGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Mensch ärgere Dich nicht");
         setBackground(new java.awt.Color(255, 0, 0));
         setForeground(java.awt.Color.white);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jButton1.setText("Würfeln");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       this.sf.getW1().werfe();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+
+    }//GEN-LAST:event_formMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }

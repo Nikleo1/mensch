@@ -4,13 +4,14 @@
  * and open the template in the editor.
  */
 
-package mensch.aerger.dich.nicht.objekts;
+package mensch.aerger.dich.nicht.modell;
 
 /**
  *
  * @author Administrator
  */
-public class SpielerSpieler extends Spieler{
+public class ComputerSpieler extends Spieler{
+    
     
     
 }

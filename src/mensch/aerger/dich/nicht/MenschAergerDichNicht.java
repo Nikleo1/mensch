@@ -6,7 +6,7 @@
 
 package mensch.aerger.dich.nicht;
 
-import mensch.aerger.dich.nicht.objekts.Wuerfel;
+import mensch.aerger.dich.nicht.modell.Wuerfel;
 
 /**
  *
@@ -23,7 +23,8 @@ public class MenschAergerDichNicht {
 
         fenster = new MainGUI();
         fenster.starte();
-        fenster.setVisible(true);
+        StartGui.main(args);
+        
         
     }
 

@@ -4,14 +4,15 @@
  * and open the template in the editor.
  */
 
-package mensch.aerger.dich.nicht.objekts;
+package mensch.aerger.dich.nicht.view;
+
+import java.awt.Graphics;
 
 /**
  *
- * @author Administrator
+ * @author Janneck
  */
-public class ComputerSpieler extends Spieler{
-    
-    
+public abstract interface GrafikInterface {
+    void repaint(Graphics g);
     
 }
