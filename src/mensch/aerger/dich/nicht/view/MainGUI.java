@@ -30,10 +30,11 @@ public class MainGUI extends javax.swing.JFrame {
 
         comp = new LinesComponent();
         comp.setPreferredSize(new Dimension(1920, 1080));
+         getContentPane().setBounds(0, 0, -1, -1);
       //  comp.addMouseListener(this);
 
-        getContentPane().add(comp, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
+        getContentPane().add(comp,  new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+// new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1)
         getContentPane().setBackground(Color.WHITE);
 
         this.setSize(new Dimension(1024, 785));
@@ -50,7 +51,7 @@ public class MainGUI extends javax.swing.JFrame {
     }
     
     public void setzeText(String text){
-        this.jLabel1.setText(text);
+       // this.jLabel1.setText(text);
     }
 
     public VierSpielerFeld getSpielFeld() {
@@ -74,8 +75,6 @@ public class MainGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Mensch ärgere Dich nicht");
         setBackground(new java.awt.Color(255, 0, 0));
@@ -87,9 +86,6 @@ public class MainGUI extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Wilkommen");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 20));
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -100,6 +96,5 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_formMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
