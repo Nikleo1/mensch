@@ -6,11 +6,17 @@
 
 package mensch.aerger.dich.nicht.modell;
 
+import java.awt.Color;
+
 /**
  *
  * @author Administrator
  */
 public class ComputerSpieler extends Spieler{
+
+    public ComputerSpieler(int id, Color farbe) {
+        super(id, farbe);
+    }
     
     
     

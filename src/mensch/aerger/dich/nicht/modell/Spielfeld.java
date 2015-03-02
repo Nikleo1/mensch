@@ -6,10 +6,11 @@
 package mensch.aerger.dich.nicht.modell;
 
 import java.awt.Color;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import mensch.aerger.dich.nicht.MenschAergerDichNicht;
+
+
 
 /**
  *
@@ -17,7 +18,7 @@ import mensch.aerger.dich.nicht.MenschAergerDichNicht;
  */
 public class Spielfeld {
 
-    private Wuerfel w1;
+    private Wuerfel wuerfel;
     private int SpielerZahl;
     private HashMap<Integer, Feld> startFelder;
     private HashMap<Integer, List<Feld>> hausFelder;
@@ -29,7 +30,7 @@ public class Spielfeld {
         hausFelder = new HashMap<Integer, List<Feld>>();
         hausPos = new HashMap<Integer, Position>();
         spieler = new HashMap<Integer, Spieler>();
-        w1 = w;
+        wuerfel = w;
         this.SpielerZahl = Spielerzahl;
         this.baueAuf();
         this.zeichne();
@@ -52,7 +53,7 @@ public class Spielfeld {
         Feld f2 = f1;
         Feld f3 = f1;
         // f1 = f1.getNaechstes();
-        this.w1.werfe();
+        this.wuerfel.werfe();
         while (f2.getNaechstes() != f1) {
 
             Color c = Color.black;
@@ -119,13 +120,10 @@ public class Spielfeld {
         return hausPos;
     }
 
-    public Wuerfel getW1() {
-        return w1;
+    public Wuerfel getWuerfel() {
+        return wuerfel;
     }
 
-    public void setW1(Wuerfel w1) {
-        this.w1 = w1;
-    }
 
     public int getSpielerZahl() {
         return SpielerZahl;

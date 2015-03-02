@@ -6,6 +6,7 @@
 
 package mensch.aerger.dich.nicht.modell;
 
+import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,6 +15,12 @@ import java.util.List;
  * @author Administrator
  */
 public class SpielerSpieler extends Spieler{
+
+    public SpielerSpieler(int id,String name, Color farbe) {
+        super(id, farbe);
+        super.setName(name);
+    }
+    
     
     public List<Moeglichkeit> gibMoeglichkeiten(int Zahl){
         List<Moeglichkeit> felder = new LinkedList<Moeglichkeit>();

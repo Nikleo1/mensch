@@ -4,9 +4,12 @@
  * and open the template in the editor.
  */
 
-package mensch.aerger.dich.nicht;
+package mensch.aerger.dich.nicht.view;
 
+import java.util.LinkedList;
+import java.util.List;
 import mensch.aerger.dich.nicht.controll.Spielsteuerung;
+import mensch.aerger.dich.nicht.modell.SpielerInfo;
 
 /**
  *
@@ -182,7 +185,13 @@ public class StartGui extends javax.swing.JFrame {
     }//GEN-LAST:event_jCheckBox4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        s.starte();
+        List<SpielerInfo> sp = new LinkedList<SpielerInfo>();
+        sp.add(new SpielerInfo(1,this.jTextField1.getText(),this.jCheckBox1.isEnabled()));
+        sp.add(new SpielerInfo(2,this.jTextField2.getText(),this.jCheckBox2.isEnabled()));
+        sp.add(new SpielerInfo(3,this.jTextField3.getText(),this.jCheckBox3.isEnabled()));
+        sp.add(new SpielerInfo(4,this.jTextField4.getText(),this.jCheckBox4.isEnabled()));
+
+        s.starte(sp);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

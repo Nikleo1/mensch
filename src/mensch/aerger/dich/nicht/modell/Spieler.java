@@ -19,6 +19,8 @@ public class Spieler {
     private Color farbe;
     private List<Figur> figuren;
 
+    private String name;
+
     public Spieler(int id, Color farbe) {
         this.id = id;
         this.farbe = farbe;
@@ -27,6 +29,14 @@ public class Spieler {
     public Spieler(){
         
     }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
 
     public int getId() {
         return id;

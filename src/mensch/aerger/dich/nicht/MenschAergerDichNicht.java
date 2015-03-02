@@ -6,7 +6,9 @@
 
 package mensch.aerger.dich.nicht;
 
-import mensch.aerger.dich.nicht.modell.Wuerfel;
+import mensch.aerger.dich.nicht.view.StartGui;
+import mensch.aerger.dich.nicht.view.MainGUI;
+import mensch.aerger.dich.nicht.controll.Spielsteuerung;
 
 /**
  *
@@ -18,6 +20,7 @@ public class MenschAergerDichNicht {
      * @param args the command line arguments
      */
     private static MainGUI fenster;
+    private static Spielsteuerung spielSteuerung;
    
     public static void main(String[] args) {
 
@@ -28,6 +31,15 @@ public class MenschAergerDichNicht {
         
     }
 
+    public static Spielsteuerung getSpielSteuerung() {
+        return spielSteuerung;
+    }
+
+    public static void setSpielSteuerung(Spielsteuerung spielSteuerung) {
+        MenschAergerDichNicht.spielSteuerung = spielSteuerung;
+    }
+
+    
     public static MainGUI getFenster() {
         return fenster;
     }

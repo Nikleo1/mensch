@@ -10,6 +10,9 @@ import java.awt.Graphics;
 import java.util.LinkedList;
 import mensch.aerger.dich.nicht.MenschAergerDichNicht;
 
+
+
+
 /**
  *
  * @author Janneck
@@ -76,6 +79,7 @@ public class Wuerfelmanager implements GrafikInterface {
         for (RoundedRect r : rr) {
             g.setColor(r.color);
             g.drawRoundRect(r.x, r.y, r.width, r.heigh, r.round, r.round);
+            
 
         }
         for (Circle c : circles) {

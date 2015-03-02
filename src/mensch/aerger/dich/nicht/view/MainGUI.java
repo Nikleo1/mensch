@@ -3,15 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package mensch.aerger.dich.nicht;
+package mensch.aerger.dich.nicht.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import mensch.aerger.dich.nicht.view.Grafikmanager;
+import mensch.aerger.dich.nicht.MenschAergerDichNicht;
 import mensch.aerger.dich.nicht.modell.Spielfelder.VierSpielerFeld;
+import mensch.aerger.dich.nicht.view.Grafikmanager;
 import mensch.aerger.dich.nicht.view.LinesComponent;
-
 
 /**
  *
@@ -25,29 +24,39 @@ public class MainGUI extends javax.swing.JFrame {
     private LinesComponent comp;
     private Grafikmanager grafikManager;
     private int scale = 50;
-    
+
     public MainGUI() {
         initComponents();
-       
+
         comp = new LinesComponent();
         comp.setPreferredSize(new Dimension(1920, 1080));
       //  comp.addMouseListener(this);
-       
+
         getContentPane().add(comp, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-        
+
         getContentPane().setBackground(Color.WHITE);
-        
+
         this.setSize(new Dimension(1024, 785));
         grafikManager = new Grafikmanager(comp);
         setExtendedState(MAXIMIZED_BOTH);
-       
+
     }
-     private VierSpielerFeld sf;
-    public void starte(){
+    private VierSpielerFeld spielFeld;
+
+    public void starte() {
         //Wuerfel w = new Wuerfel(6,6);
         //w.werfe();
-        sf = new VierSpielerFeld();
+        spielFeld = new VierSpielerFeld();
     }
+    
+    public void setzeText(String text){
+        this.jLabel1.setText(text);
+    }
+
+    public VierSpielerFeld getSpielFeld() {
+        return spielFeld;
+    }
+
     public Grafikmanager getGrafikmanager() {
         return grafikManager;
     }
@@ -55,7 +64,6 @@ public class MainGUI extends javax.swing.JFrame {
     public int getScale() {
         return scale;
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -65,6 +73,8 @@ public class MainGUI extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Mensch ärgere Dich nicht");
@@ -77,13 +87,19 @@ public class MainGUI extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setText("Wilkommen");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 20));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-
+        if(MenschAergerDichNicht.getSpielSteuerung()!= null){
+            MenschAergerDichNicht.getSpielSteuerung().mausClick(evt);
+        }
     }//GEN-LAST:event_formMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
