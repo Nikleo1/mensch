@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 import mensch.aerger.dich.nicht.MenschAergerDichNicht;
 import mensch.aerger.dich.nicht.modell.ComputerSpieler;
+import mensch.aerger.dich.nicht.modell.Spieler;
 import mensch.aerger.dich.nicht.modell.SpielerInfo;
 import mensch.aerger.dich.nicht.modell.SpielerSpieler;
 import mensch.aerger.dich.nicht.modell.Spielfelder.VierSpielerFeld;
@@ -17,43 +18,88 @@ import mensch.aerger.dich.nicht.modell.Spielfelder.VierSpielerFeld;
  *
  * @author janneck
  */
-public class Spielsteuerung {
+public class Spielsteuerung implements Runnable {
 
     private VierSpielerFeld sf;
     private int istDran;
-    private boolean wuerfelnKlicked = false;
-    private boolean wuerfelFrei = false;
+    private boolean getStarter;
+
+    private boolean starter = true;
 
     public void starte(List<SpielerInfo> spielerInf) {
         MenschAergerDichNicht.setSpielSteuerung(this);
-        istDran = 1;
+        istDran = 0;
         sf = MenschAergerDichNicht.getFenster().getSpielFeld();
-        for (int i = 0; i < 4; i++) {
-            if (spielerInf.get(i).isComputer()) {
-                sf.getSpieler().put(i + 1, new ComputerSpieler(i + 1, sf.getSpieler().get(i + 1).getFarbe()));
+        for (int i = 1; i <= 4; i++) {
+            if (spielerInf.get(i - 1).isComputer()) {
+                sf.getSpieler().put(i, new ComputerSpieler(i, sf.getSpieler().get(i).getFarbe()));
             } else {
-                sf.getSpieler().put(i + 1, new SpielerSpieler(i + 1, spielerInf.get(i).getName(), sf.getSpieler().get(i + 1).getFarbe()));
+                sf.getSpieler().put(i, new SpielerSpieler(i, spielerInf.get(i - 1).getName(), sf.getSpieler().get(i).getFarbe()));
             }
         }
-        MenschAergerDichNicht.getFenster().setVisible(true);
-        this.getStarter();
+        System.out.println(sf.getSpieler().size());
+        getStarter = true;
     }
 
-    public int getStarter() {
-        this.wuerfelFrei = true;
+    public void getStarter() {
+        if (this.istDran < sf.getSpielerZahl()) {
+            this.istDran++;
+
+            MenschAergerDichNicht.getFenster().setzeText("Bitte würfele " + sf.getSpieler().get(this.istDran).getName());
+            MenschAergerDichNicht.getFenster().repaint();
+
+            sf.getSpieler().get(istDran).getStarter();
+
+        } else {
+            this.istDran = 0;
+            getStarter = false;
+            this.starteSpiel();
+        }
+
+    }
+
+    public void starteSpiel() {
+        MenschAergerDichNicht.getFenster().setzeText("START");
+        int startSpieler = 0;
+        int zahl = 0;
+        for(Spieler s : sf.getSpieler().values()){
+            if(s.getLetzteZahl() > zahl){
+                zahl = s.getLetzteZahl();
+                startSpieler = s.getId();
+            }
+        }
         
-
-        return 1;
+        this.istDran = startSpieler;
+         sf.getSpieler().get(this.istDran).istDran();
     }
+    public void naechster(){
+        if(this.istDran < 4){
+            this.istDran++;
+        }else{
+            this.istDran = 1;
+        }
+         sf.getSpieler().get(this.istDran).istDran();
+    }
+    
 
     public void mausClick(MouseEvent evt) {
-        System.out.println(sf.getWuerfel().getX() + " " + evt.getX() + " " + sf.getWuerfel().getXout());
-         System.out.println(sf.getWuerfel().getY() + " " + evt.getY() + " " + sf.getWuerfel().getYout());
-         System.out.println("");
-        if (this.wuerfelFrei && evt.getX() > sf.getWuerfel().getX()  && evt.getY() > sf.getWuerfel().getY()  && evt.getX() < sf.getWuerfel().getXout() && evt.getY()  < sf.getWuerfel().getYout() ) {
-            sf.getWuerfel().werfe();
+
+        if (getStarter && evt.getX() > sf.getWuerfel().getX() && evt.getY() > sf.getWuerfel().getY() && evt.getX() < sf.getWuerfel().getXout() && evt.getY() < sf.getWuerfel().getYout()) {
+            if (sf.getSpieler().get(this.istDran) instanceof SpielerSpieler) {
+                ((SpielerSpieler) sf.getSpieler().get(this.istDran)).wuerfele();
+            }
+
+        } else if (sf.getSpieler().get(this.istDran) instanceof SpielerSpieler) {
             
+            ((SpielerSpieler) sf.getSpieler().get(this.istDran)).klicke(evt.getX(), evt.getX());
         }
+
+    }
+
+    @Override
+    public void run() {
+        MenschAergerDichNicht.getFenster().setVisible(true);
+        this.getStarter();
 
     }
 

@@ -12,6 +12,7 @@ import mensch.aerger.dich.nicht.MenschAergerDichNicht;
 
 
 
+
 /**
  *
  * @author janneck
@@ -22,13 +23,12 @@ public class Spielfeld {
     private int SpielerZahl;
     private HashMap<Integer, Feld> startFelder;
     private HashMap<Integer, List<Feld>> hausFelder;
-    private HashMap<Integer, Position> hausPos;
     private HashMap<Integer, Spieler> spieler;
 
     public Spielfeld(Wuerfel w, int Spielerzahl) {
         startFelder = new HashMap<Integer, Feld>();
         hausFelder = new HashMap<Integer, List<Feld>>();
-        hausPos = new HashMap<Integer, Position>();
+      
         spieler = new HashMap<Integer, Spieler>();
         wuerfel = w;
         this.SpielerZahl = Spielerzahl;
@@ -70,7 +70,7 @@ public class Spielfeld {
                 f3 = f3.getHaus();
 
                 c = this.getSpieler().get(f3.getEigentuemer()).getFarbe();
-                System.out.println(f3.getPosition().getX() + " " + f3.getPosition().getY());
+               
                 MenschAergerDichNicht.getFenster().getGrafikmanager().getFeldManager().addFeld(f3.getPosition().getX(), f3.getPosition().getY(), c);
                 //f3 = f3.getHaus();
 
@@ -91,7 +91,6 @@ public class Spielfeld {
             f3 = f3.getHaus();
 
             c = this.getSpieler().get(f3.getEigentuemer()).getFarbe();
-            System.out.println(f3.getPosition().getX() + " " + f3.getPosition().getY());
             MenschAergerDichNicht.getFenster().getGrafikmanager().getFeldManager().addFeld(f3.getPosition().getX(), f3.getPosition().getY(), c);
                 //f3 = f3.getHaus();
 
@@ -116,9 +115,7 @@ public class Spielfeld {
         return hausFelder;
     }
 
-    public HashMap<Integer, Position> getHausPos() {
-        return hausPos;
-    }
+    
 
     public Wuerfel getWuerfel() {
         return wuerfel;

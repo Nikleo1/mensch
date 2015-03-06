@@ -9,6 +9,9 @@ package mensch.aerger.dich.nicht.modell;
 import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import mensch.aerger.dich.nicht.MenschAergerDichNicht;
 
 /**
  *
@@ -41,4 +44,29 @@ public class SpielerSpieler extends Spieler{
         return felder;
       
     }
+    public void wuerfele(){
+        this.setLetzteZahl(MenschAergerDichNicht.getFenster().getSpielFeld().getWuerfel().werfe());
+        
+        System.out.println("D "+ this.getLetzteZahl());
+      
+        MenschAergerDichNicht.getSpielSteuerung().getStarter();
+       
+    }
+    
+
+    @Override
+    public void istDran() {
+        
+    }
+    public void klicke(int x, int y){
+        
+    }
+
+    @Override
+    public void getStarter() {
+       
+    }
+
+   
+    
 }

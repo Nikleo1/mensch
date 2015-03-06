@@ -8,6 +8,8 @@ package mensch.aerger.dich.nicht.modell;
 import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
+import mensch.aerger.dich.nicht.controll.Spielsteuerung;
+import mensch.aerger.dich.nicht.modell.stat.FeldType;
 
 /**
  *
@@ -18,7 +20,7 @@ public class Spieler {
     private int id;
     private Color farbe;
     private List<Figur> figuren;
-
+    private int letzteZahl;
     private String name;
 
     public Spieler(int id, Color farbe) {
@@ -32,6 +34,15 @@ public class Spieler {
     public String getName() {
         return name;
     }
+
+    public int getLetzteZahl() {
+        return letzteZahl;
+    }
+
+    public void setLetzteZahl(int letzteZahl) {
+        this.letzteZahl = letzteZahl;
+    }
+    
 
     public void setName(String name) {
         this.name = name;
@@ -49,9 +60,29 @@ public class Spieler {
     public List<Figur> getFiguren() {
         return figuren;
     }
-
-    protected void istDran() {
-
+    public boolean hatGewonnen(){
+        boolean b = true;
+        for(Figur F :this.getFiguren()){
+            if(F.getPos().getType() != FeldType.HAUS){
+                b = false;
+            }
+        }
+        
+        return b;
     }
+    public boolean isVorhausLeer(){
+        boolean b = true;
+         for(Figur F :this.getFiguren()){
+            if(F.getPos().getType() != FeldType.VORHAUS){
+                b = false;
+            }
+        }
+        return b;
+    }
+    public void istDran(){}
+    public void getStarter(){}
+        
+    
+    
 
 }

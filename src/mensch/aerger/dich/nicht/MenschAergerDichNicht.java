@@ -6,6 +6,8 @@
 
 package mensch.aerger.dich.nicht;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import mensch.aerger.dich.nicht.view.StartGui;
 import mensch.aerger.dich.nicht.view.MainGUI;
 import mensch.aerger.dich.nicht.controll.Spielsteuerung;
@@ -21,10 +23,19 @@ public class MenschAergerDichNicht {
      */
     private static MainGUI fenster;
     private static Spielsteuerung spielSteuerung;
+
+    public static void setFenster(MainGUI fenster) {
+        MenschAergerDichNicht.fenster = fenster;
+    }
    
     public static void main(String[] args) {
 
-        fenster = new MainGUI();
+        MainGUI.main(args);
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(MenschAergerDichNicht.class.getName()).log(Level.SEVERE, null, ex);
+        }
         fenster.starte();
         StartGui.main(args);
         

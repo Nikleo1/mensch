@@ -5,11 +5,14 @@
  */
 package mensch.aerger.dich.nicht.modell;
 
+import mensch.aerger.dich.nicht.MenschAergerDichNicht;
+
 /**
  *
  * @author Administrator
  */
 public class Figur {
+
     Spieler eigentuemer;
     Feld pos;
 
@@ -29,13 +32,23 @@ public class Figur {
     public Feld getPos() {
         return pos;
     }
-
-    public void setPos(Feld pos) {
-        this.pos = pos;
+    public void insHaus(){
+        Feld p = null;
+        for(Feld f : MenschAergerDichNicht.getFenster().getSpielFeld().getHausFelder().get(this.getEigentuemer().getId())){
+            if(!f.istBelegt() && p == null){
+                p = f;
+            }
+        }
+        this.bewegeAufFeld(pos);
+        
     }
-    
-   
-    
-    
-    
+
+    public void bewegeAufFeld(Feld pos) {
+        if (pos != null) {
+            this.getPos().leeren();
+        }
+        this.pos = pos;
+        pos.belege(this);
+    }
+
 }

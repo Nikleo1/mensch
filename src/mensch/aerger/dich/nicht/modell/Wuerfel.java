@@ -23,9 +23,10 @@ public class Wuerfel {
 
     }
 
-    public void werfe() {
+    public int werfe() {
         zahl = (int) (Math.random() * 6 + 1);
         this.zeichne();
+        return zahl;
     }
 
     private void zeichne() {
@@ -66,7 +67,7 @@ public class Wuerfel {
     }
 
     public int getX() {
-        return x + 10;
+        return x + 5;
     }
 
     public int getY() {

@@ -87,13 +87,28 @@ public class StartGui extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setText("Name");
+        jTextField1.setText("Name1");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
-        jTextField2.setText("Name");
+        jTextField2.setText("Name2");
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
 
-        jTextField3.setText("Name");
+        jTextField3.setText("Name3");
 
-        jTextField4.setText("Name");
+        jTextField4.setText("Name4");
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Starten");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -186,14 +201,27 @@ public class StartGui extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         List<SpielerInfo> sp = new LinkedList<SpielerInfo>();
-        sp.add(new SpielerInfo(1,this.jTextField1.getText(),this.jCheckBox1.isEnabled()));
-        sp.add(new SpielerInfo(2,this.jTextField2.getText(),this.jCheckBox2.isEnabled()));
-        sp.add(new SpielerInfo(3,this.jTextField3.getText(),this.jCheckBox3.isEnabled()));
-        sp.add(new SpielerInfo(4,this.jTextField4.getText(),this.jCheckBox4.isEnabled()));
+        sp.add(new SpielerInfo(1,this.jTextField1.getText(),this.jCheckBox1.isSelected()));
+        sp.add(new SpielerInfo(2,this.jTextField2.getText(),this.jCheckBox2.isSelected()));
+        sp.add(new SpielerInfo(3,this.jTextField3.getText(),this.jCheckBox3.isSelected()));
+        sp.add(new SpielerInfo(4,this.jTextField4.getText(),this.jCheckBox4.isSelected()));
 
         s.starte(sp);
+        (new Thread(s)).start();
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField4ActionPerformed
 
     /**
      * @param args the command line arguments
