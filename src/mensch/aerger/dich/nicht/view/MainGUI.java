@@ -41,7 +41,7 @@ public class MainGUI extends javax.swing.JFrame {
 
         this.setSize(new Dimension(1024, 785));
         grafikManager = new Grafikmanager(comp);
-        setExtendedState(MAXIMIZED_BOTH);
+        //setExtendedState(MAXIMIZED_BOTH);
 
     }
     private VierSpielerFeld spielFeld;
@@ -84,7 +84,8 @@ public class MainGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Mensch ärgere Dich nicht");
-        setBackground(new java.awt.Color(255, 0, 0));
+        setAutoRequestFocus(false);
+        setBackground(new java.awt.Color(255, 255, 255));
         setForeground(java.awt.Color.white);
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

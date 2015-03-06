@@ -28,7 +28,7 @@ public class Feld {
         return f !=null;
     }
     public boolean hatHaus(){
-        return haus!=null;
+        return (haus != null);
     }
     public void leeren(){
         f = null;

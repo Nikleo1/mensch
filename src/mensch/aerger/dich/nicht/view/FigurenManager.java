@@ -59,8 +59,8 @@ public class FigurenManager implements GrafikInterface {
 
     public void updateSpieler() {
         for (Entry<Figur, Circle> s : figuren.entrySet()) {
-            s.getValue().x = MenschAergerDichNicht.getFenster().getScale() * s.getKey().getPos().getPosition().getX();
-            s.getValue().y = MenschAergerDichNicht.getFenster().getScale() * s.getKey().getPos().getPosition().getY();
+            s.getValue().x = MenschAergerDichNicht.getFenster().getScale() * s.getKey().getPos().getPosition().getX() + (int) (MenschAergerDichNicht.getFenster().getScale() * 0.1);
+            s.getValue().y = MenschAergerDichNicht.getFenster().getScale() * s.getKey().getPos().getPosition().getY() + (int) (MenschAergerDichNicht.getFenster().getScale() * 0.1);
         }
         MenschAergerDichNicht.getFenster().getGrafikmanager().getZeichner().repaint();
     }

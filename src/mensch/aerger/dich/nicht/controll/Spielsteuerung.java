@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 import mensch.aerger.dich.nicht.MenschAergerDichNicht;
 import mensch.aerger.dich.nicht.modell.ComputerSpieler;
+import mensch.aerger.dich.nicht.modell.Figur;
 import mensch.aerger.dich.nicht.modell.Spieler;
 import mensch.aerger.dich.nicht.modell.SpielerInfo;
 import mensch.aerger.dich.nicht.modell.SpielerSpieler;
@@ -31,11 +32,16 @@ public class Spielsteuerung implements Runnable {
         istDran = 0;
         sf = MenschAergerDichNicht.getFenster().getSpielFeld();
         for (int i = 1; i <= 4; i++) {
+            List<Figur> fig = sf.getSpieler().get(i).getFiguren();
+            Spieler s;
             if (spielerInf.get(i - 1).isComputer()) {
-                sf.getSpieler().put(i, new ComputerSpieler(i, sf.getSpieler().get(i).getFarbe()));
+               s = new ComputerSpieler(i, sf.getSpieler().get(i).getFarbe());
+                // sf.getSpieler().put(i, new ComputerSpieler(i, sf.getSpieler().get(i).getFarbe()));
             } else {
-                sf.getSpieler().put(i, new SpielerSpieler(i, spielerInf.get(i - 1).getName(), sf.getSpieler().get(i).getFarbe()));
+                s = new SpielerSpieler(i, spielerInf.get(i - 1).getName(), sf.getSpieler().get(i).getFarbe());
             }
+            s.setFiguren(fig);
+            sf.getSpieler().put(i, s);
         }
         System.out.println(sf.getSpieler().size());
         getStarter = true;
@@ -59,7 +65,7 @@ public class Spielsteuerung implements Runnable {
     }
 
     public void starteSpiel() {
-        MenschAergerDichNicht.getFenster().setzeText("START");
+       // MenschAergerDichNicht.getFenster().setzeText("START");
         int startSpieler = 0;
         int zahl = 0;
         for(Spieler s : sf.getSpieler().values()){
@@ -68,8 +74,9 @@ public class Spielsteuerung implements Runnable {
                 startSpieler = s.getId();
             }
         }
-        
+        MenschAergerDichNicht.getFenster().setzeText("Spieler " + sf.getSpieler().get(startSpieler).getName() + " beginnt");
         this.istDran = startSpieler;
+        
          sf.getSpieler().get(this.istDran).istDran();
     }
     public void naechster(){
@@ -84,14 +91,14 @@ public class Spielsteuerung implements Runnable {
 
     public void mausClick(MouseEvent evt) {
 
-        if (getStarter && evt.getX() > sf.getWuerfel().getX() && evt.getY() > sf.getWuerfel().getY() && evt.getX() < sf.getWuerfel().getXout() && evt.getY() < sf.getWuerfel().getYout()) {
+        if (evt.getX() > sf.getWuerfel().getX() && evt.getY() > sf.getWuerfel().getY() && evt.getX() < sf.getWuerfel().getXout() && evt.getY() < sf.getWuerfel().getYout()) {
             if (sf.getSpieler().get(this.istDran) instanceof SpielerSpieler) {
                 ((SpielerSpieler) sf.getSpieler().get(this.istDran)).wuerfele();
             }
 
         } else if (sf.getSpieler().get(this.istDran) instanceof SpielerSpieler) {
             
-            ((SpielerSpieler) sf.getSpieler().get(this.istDran)).klicke(evt.getX(), evt.getX());
+            ((SpielerSpieler) sf.getSpieler().get(this.istDran)).klicke(evt.getX(), evt.getY());
         }
 
     }

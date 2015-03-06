@@ -32,7 +32,7 @@ public class MenschAergerDichNicht {
 
         MainGUI.main(args);
         try {
-            Thread.sleep(500);
+            Thread.sleep(1000);
         } catch (InterruptedException ex) {
             Logger.getLogger(MenschAergerDichNicht.class.getName()).log(Level.SEVERE, null, ex);
         }

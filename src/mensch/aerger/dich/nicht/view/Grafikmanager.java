@@ -15,20 +15,28 @@ public class Grafikmanager {
     private Wuerfelmanager wuerfelManager;
     private Feldmanager feldManager;
     private FigurenManager figurenManager;
+    private MoeglichkeitenManager moeglichkeitenManager;
 
     public Grafikmanager(LinesComponent lc) {
         this.lc = lc;
         wuerfelManager = new Wuerfelmanager();
         feldManager = new Feldmanager();
         figurenManager = new FigurenManager();
+        moeglichkeitenManager = new MoeglichkeitenManager();
         lc.addInterface(wuerfelManager);
         lc.addInterface(feldManager);
         lc.addInterface(figurenManager);
+        lc.addInterface(moeglichkeitenManager);
     }
 
     public Wuerfelmanager getWuerfelManager() {
         return wuerfelManager;
     }
+
+    public MoeglichkeitenManager getMoeglichkeitenManager() {
+        return moeglichkeitenManager;
+    }
+    
 
     public Feldmanager getFeldManager() {
         return feldManager;

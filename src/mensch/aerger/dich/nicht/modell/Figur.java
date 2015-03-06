@@ -39,7 +39,7 @@ public class Figur {
                 p = f;
             }
         }
-        this.bewegeAufFeld(pos);
+        this.bewegeAufFeld(p);
         
     }
 
@@ -47,8 +47,13 @@ public class Figur {
         if (pos != null) {
             this.getPos().leeren();
         }
+        
         this.pos = pos;
+        if(pos.istBelegt()){
+            pos.getBelegt().insHaus();
+        }
         pos.belege(this);
+        MenschAergerDichNicht.getFenster().getGrafikmanager().getFigurenManager().updateSpieler();
     }
 
 }

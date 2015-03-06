@@ -6,9 +6,10 @@
 package mensch.aerger.dich.nicht.modell;
 
 import java.awt.Color;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import mensch.aerger.dich.nicht.controll.Spielsteuerung;
+import mensch.aerger.dich.nicht.MenschAergerDichNicht;
 import mensch.aerger.dich.nicht.modell.stat.FeldType;
 
 /**
@@ -22,15 +23,23 @@ public class Spieler {
     private List<Figur> figuren;
     private int letzteZahl;
     private String name;
+    public boolean getStarter = true;
+    private List<Moeglichkeit> moeglichkeiten;
 
     public Spieler(int id, Color farbe) {
         this.id = id;
         this.farbe = farbe;
         figuren = new LinkedList<Figur>();
     }
-    public Spieler(){
-        
+
+    public Spieler() {
+
     }
+
+    public List<Moeglichkeit> getMoeglichkeiten() {
+        return moeglichkeiten;
+    }
+
     public String getName() {
         return name;
     }
@@ -42,12 +51,10 @@ public class Spieler {
     public void setLetzteZahl(int letzteZahl) {
         this.letzteZahl = letzteZahl;
     }
-    
 
     public void setName(String name) {
         this.name = name;
     }
-    
 
     public int getId() {
         return id;
@@ -60,29 +67,92 @@ public class Spieler {
     public List<Figur> getFiguren() {
         return figuren;
     }
-    public boolean hatGewonnen(){
+
+    public boolean hatGewonnen() {
         boolean b = true;
-        for(Figur F :this.getFiguren()){
-            if(F.getPos().getType() != FeldType.HAUS){
+        for (Figur F : this.getFiguren()) {
+            if (F.getPos().getType() != FeldType.HAUS) {
                 b = false;
             }
         }
-        
+
         return b;
     }
-    public boolean isVorhausLeer(){
+
+    public boolean isVorhausLeer() {
         boolean b = true;
-         for(Figur F :this.getFiguren()){
-            if(F.getPos().getType() != FeldType.VORHAUS){
+        for (Figur F : this.getFiguren()) {
+            if (F.getPos().getType() == FeldType.VORHAUS) {
                 b = false;
             }
         }
         return b;
     }
-    public void istDran(){}
-    public void getStarter(){}
-        
-    
-    
+
+    public boolean isVorhausVoll() {
+        boolean b = true;
+        for (Figur F : this.getFiguren()) {
+            if (F.getPos().getType() != FeldType.VORHAUS) {
+                b = false;
+            }
+        }
+        return b;
+    }
+
+    public void refreshMoeglichkeiten(int Zahl) {
+        //List<Moeglichkeit> felder = new LinkedList<Moeglichkeit>();
+        LinkedList<Moeglichkeit> felder = new LinkedList<Moeglichkeit>();
+        for (Figur f : this.getFiguren()) {
+            Feld sf = f.getPos();
+            if (Zahl == 6 && sf.getType() == FeldType.VORHAUS && (MenschAergerDichNicht.getFenster().getSpielFeld().getStartFelder().get(this.getId()).istBelegt() == false || MenschAergerDichNicht.getFenster().getSpielFeld().getStartFelder().get(this.getId()).getBelegt().getEigentuemer().getId() != this.getId())) {
+                boolean mFrei = true;
+                for (Moeglichkeit vgl : felder) {
+                    if (vgl.getFeld().getPosition().getX() == MenschAergerDichNicht.getFenster().getSpielFeld().getStartFelder().get(this.getId()).getPosition().getX()) {
+                        if (vgl.getFeld().getPosition().getY() == MenschAergerDichNicht.getFenster().getSpielFeld().getStartFelder().get(this.getId()).getPosition().getY()) {
+                            mFrei = false;
+                        }
+                    }
+                }
+                if (mFrei) {
+                    felder.add(new Moeglichkeit(f, MenschAergerDichNicht.getFenster().getSpielFeld().getStartFelder().get(this.getId())));
+                }
+            } else {
+                boolean loesung = true;
+                for (int i = 0; i < Zahl; i++) {
+                    
+                    if (sf.getNaechstes() != null || sf.getHaus() != null) {
+                        if (sf.hatHaus() && sf.getHaus().getEigentuemer() == this.getId()) {
+                            sf = sf.getHaus();
+                            if (sf.istBelegt()){
+                                loesung = false;
+                            }
+                        } else {
+                            sf = sf.getNaechstes();
+                        }
+                        
+                    }else if(Zahl == (i + 1)){
+                        loesung = false;
+                    }
+                }
+                if ((!sf.istBelegt() ||  sf.getBelegt().getEigentuemer().getId() != this.getId()) && sf.getType() != FeldType.VORHAUS && loesung) {
+                    felder.add(new Moeglichkeit(f, sf));
+                }
+            }
+
+        }
+
+        this.moeglichkeiten = felder;
+
+    }
+
+    public void setFiguren(List<Figur> figuren) {
+        this.figuren = figuren;
+    }
+
+    public void istDran() {
+    }
+
+    public void getStarter() {
+    }
 
 }
