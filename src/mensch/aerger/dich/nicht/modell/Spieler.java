@@ -25,11 +25,22 @@ public class Spieler {
     private String name;
     public boolean getStarter = true;
     private List<Moeglichkeit> moeglichkeiten;
+    public boolean istFertig;
+    public int versuch = 1;
 
     public Spieler(int id, Color farbe) {
+        this.istFertig = false;
         this.id = id;
         this.farbe = farbe;
         figuren = new LinkedList<Figur>();
+    }
+
+    public boolean istFertig() {
+        return istFertig;
+    }
+
+    public void setFertig() {
+        this.istFertig = true;
     }
 
     public Spieler() {
@@ -98,9 +109,32 @@ public class Spieler {
         }
         return b;
     }
+    public boolean isHausAufegraumt(){
+        boolean b = true;
+        int nr = 5;
+        Feld feld = null;
+        for (Figur f : this.getFiguren()) {
+            if(!(f.getPos().getType() == FeldType.HAUS || f.getPos().getType() == FeldType.VORHAUS)){
+                b = false;
+            }
+            if(f.getPos().getType() == FeldType.HAUS && f.getPos().getNummer() < nr){
+                nr = f.getPos().getNummer();
+                feld = f.getPos();
+            }
+        }
+        if(nr != 5){
+            while(feld.hatHaus()){
+                if(!feld.getHaus().istBelegt()){
+                    b = false;
+                }
+                feld = feld.getHaus();
+            }
+        }
+        
+        return b;
+    }
 
     public void refreshMoeglichkeiten(int Zahl) {
-        //List<Moeglichkeit> felder = new LinkedList<Moeglichkeit>();
         LinkedList<Moeglichkeit> felder = new LinkedList<Moeglichkeit>();
         for (Figur f : this.getFiguren()) {
             Feld sf = f.getPos();

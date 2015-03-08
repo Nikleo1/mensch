@@ -15,15 +15,25 @@ public class Feld {
     Feld haus;
     Figur f;
     Position p;
+    int nummer;
     int eigentuemer;
     int Type;
 
     public Feld(Position p, int Type) {
-
+        this.nummer = 5;
         this.p = p;
         this.Type = Type;
         this.eigentuemer = 0;
     }
+
+    public int getNummer() {
+        return nummer;
+    }
+
+    public void setNummer(int nummer) {
+        this.nummer = nummer;
+    }
+    
     public boolean istBelegt(){
         return f !=null;
     }

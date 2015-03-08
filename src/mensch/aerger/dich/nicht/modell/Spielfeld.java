@@ -22,12 +22,12 @@ public class Spielfeld {
     private Wuerfel wuerfel;
     private int SpielerZahl;
     private HashMap<Integer, Feld> startFelder;
-    private HashMap<Integer, List<Feld>> hausFelder;
+    private HashMap<Integer, List<Feld>> vorHausFelder;
     private HashMap<Integer, Spieler> spieler;
 
     public Spielfeld(Wuerfel w, int Spielerzahl) {
         startFelder = new HashMap<Integer, Feld>();
-        hausFelder = new HashMap<Integer, List<Feld>>();
+        vorHausFelder = new HashMap<Integer, List<Feld>>();
       
         spieler = new HashMap<Integer, Spieler>();
         wuerfel = w;
@@ -112,7 +112,7 @@ public class Spielfeld {
     }
 
     public HashMap<Integer, List<Feld>> getHausFelder() {
-        return hausFelder;
+        return vorHausFelder;
     }
 
     

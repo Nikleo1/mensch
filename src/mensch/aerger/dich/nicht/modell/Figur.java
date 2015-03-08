@@ -6,6 +6,7 @@
 package mensch.aerger.dich.nicht.modell;
 
 import mensch.aerger.dich.nicht.MenschAergerDichNicht;
+import mensch.aerger.dich.nicht.modell.stat.FeldType;
 
 /**
  *
@@ -32,28 +33,52 @@ public class Figur {
     public Feld getPos() {
         return pos;
     }
-    public void insHaus(){
+
+    public void insHaus() {
         Feld p = null;
-        for(Feld f : MenschAergerDichNicht.getFenster().getSpielFeld().getHausFelder().get(this.getEigentuemer().getId())){
-            if(!f.istBelegt() && p == null){
+        for (Feld f : MenschAergerDichNicht.getFenster().getSpielFeld().getHausFelder().get(this.getEigentuemer().getId())) {
+            if (!f.istBelegt() && p == null) {
                 p = f;
             }
         }
         this.bewegeAufFeld(p);
-        
+
     }
 
     public void bewegeAufFeld(Feld pos) {
         if (pos != null) {
             this.getPos().leeren();
         }
-        
+
         this.pos = pos;
-        if(pos.istBelegt()){
+        if (pos.istBelegt()) {
             pos.getBelegt().insHaus();
         }
         pos.belege(this);
         MenschAergerDichNicht.getFenster().getGrafikmanager().getFigurenManager().updateSpieler();
+    }
+
+    public int entfernungZumHaus() {
+        int i = 100;
+        Feld sf = this.getPos();
+        if (sf.getType() != FeldType.VORHAUS && sf.getType() != FeldType.ZUHAUSE) {
+            i = 0;
+            boolean run = true;
+            while (run) {
+                if (sf.hatHaus()) {
+                    if (sf.getHaus().getEigentuemer() != this.getEigentuemer().getId()) {
+                        run = false;
+                    }
+                }
+                if (sf.getNaechstes() != null) {
+                    sf = sf.getNaechstes();
+                } else {
+                    run = false;
+                }
+                i++;
+            }
+        }
+        return i;
     }
 
 }

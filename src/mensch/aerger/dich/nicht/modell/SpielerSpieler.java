@@ -18,33 +18,35 @@ import mensch.aerger.dich.nicht.MenschAergerDichNicht;
  * @author Administrator
  */
 public class SpielerSpieler extends Spieler {
-    
+
     public SpielerSpieler(int id, String name, Color farbe) {
         super(id, farbe);
         super.setName(name);
+
     }
     private boolean warteAufAuswahl = false;
     private boolean warteAufWuerfel = false;
-    private int versuch = 1;
-    
+
+   
+
     public void wuerfele() {
         if (this.getStarter || this.warteAufWuerfel) {
             this.setLetzteZahl(MenschAergerDichNicht.getFenster().getSpielFeld().getWuerfel().werfe());
             System.out.println("D " + this.getLetzteZahl());
-            
+
             if (this.getStarter) {
                 this.getStarter = false;
                 MenschAergerDichNicht.getSpielSteuerung().getStarter();
-                
+
             } else {
-                
+
                 System.out.println("R " + this.getLetzteZahl());
                 this.refreshMoeglichkeiten(this.getLetzteZahl());
                 MenschAergerDichNicht.getFenster().getGrafikmanager().getMoeglichkeitenManager().clearAll();
                 for (Moeglichkeit m : this.getMoeglichkeiten()) {
-                    MenschAergerDichNicht.getFenster().getGrafikmanager().getMoeglichkeitenManager().addMoeglichkeit(m.getFeld().getPosition());
+                    MenschAergerDichNicht.getFenster().getGrafikmanager().getMoeglichkeitenManager().addMoeglichkeit(m.getFeld().getPosition(), m.getFeld().istBelegt());
                 }
-                if (this.isVorhausVoll() && this.versuch < 3 && this.getMoeglichkeiten().isEmpty()) {
+                if ((this.isVorhausVoll() || this.isHausAufegraumt()) && this.versuch < 3 && this.getMoeglichkeiten().isEmpty()) {
                     this.versuch++;
                     MenschAergerDichNicht.getFenster().setzeText("Bitte würfele erneut " + this.getName());
                 } else {
@@ -59,33 +61,32 @@ public class SpielerSpieler extends Spieler {
             }
         }
     }
-    
+
     @Override
     public void istDran() {
-        MenschAergerDichNicht.getFenster().setzeText("Spieler " + this.getName() + " ist dran");
-        this.versuch = 1;
-        // this.getFiguren().get(0).bewegeAufFeld(MenschAergerDichNicht.getFenster().getSpielFeld().getStartFelder().get(this.getId()));
-        this.warteAufWuerfel = true;
-        
+        if (!this.istFertig()) {
+            MenschAergerDichNicht.getFenster().setzeText("Spieler " + this.getName() + " ist dran");
+            this.versuch = 1;
+            // this.getFiguren().get(0).bewegeAufFeld(MenschAergerDichNicht.getFenster().getSpielFeld().getStartFelder().get(this.getId()));
+            this.warteAufWuerfel = true;
+        }else{
+            MenschAergerDichNicht.getSpielSteuerung().naechster();
+        }
     }
-    
+
     public void klicke(int x, int y) {
         if (this.warteAufAuswahl) {
-            
+
             for (Moeglichkeit m : this.getMoeglichkeiten()) {
                 System.out.println("x " + m.getFeld().getPosition().getX() * MenschAergerDichNicht.getFenster().getScale() + " " + x + " " + (m.getFeld().getPosition().getX() + 1) * MenschAergerDichNicht.getFenster().getScale());
                 System.out.println("y " + m.getFeld().getPosition().getY() * MenschAergerDichNicht.getFenster().getScale() + " " + y + " " + (m.getFeld().getPosition().getY() + 1) * MenschAergerDichNicht.getFenster().getScale());
                 if ((m.getFeld().getPosition().getX() * MenschAergerDichNicht.getFenster().getScale() + 5) < x && ((m.getFeld().getPosition().getX() + 1) * MenschAergerDichNicht.getFenster().getScale() + 5) > x && (m.getFeld().getPosition().getY() * MenschAergerDichNicht.getFenster().getScale() + 30) < y && ((m.getFeld().getPosition().getY() + 1) * MenschAergerDichNicht.getFenster().getScale() + 30) > y) {
                     this.moeglichkeitGewaehlt(m);
-                    if(this.hatGewonnen()){
-                        JOptionPane.showMessageDialog(null, "Der Spieler " + this.getName()  + " hat gewonnen !");
-                        MenschAergerDichNicht.getFenster().dispose();
-                        System.exit(0);
-                    }
+
                 }
             }
         }
-        
+
     }
 
     private void moeglichkeitGewaehlt(Moeglichkeit m) {
@@ -95,14 +96,14 @@ public class SpielerSpieler extends Spieler {
         if (this.getLetzteZahl() == 6) {
             this.versuch = 1;
             this.warteAufWuerfel = true;
-        }else{
+        } else {
             MenschAergerDichNicht.getSpielSteuerung().naechster();
         }
     }
-    
+
     @Override
     public void getStarter() {
-        
+
     }
-    
+
 }

@@ -71,6 +71,7 @@ public class VierSpielerFeld extends Spielfeld {
             yPosH++;
             f3 = new Feld(new Position(xPos, yPosH), FeldType.HAUS);
             f3.setEigentuemer(Spieler + 1 );
+            f3.setNummer(i);
             f2.setHaus(f3);
             f2 = f3;
         }
@@ -104,6 +105,7 @@ public class VierSpielerFeld extends Spielfeld {
             xPosH--;
             f3 = new Feld(new Position(xPosH, yPos), FeldType.HAUS);
             f3.setEigentuemer(Spieler+1);
+            f3.setNummer(i);
             f2.setHaus(f3);
             f2 = f3;
         }
@@ -137,6 +139,7 @@ public class VierSpielerFeld extends Spielfeld {
             yPosH--;
             f3 = new Feld(new Position(xPos, yPosH), FeldType.HAUS);
             f3.setEigentuemer(Spieler + 1);
+            f3.setNummer(i);
             f2.setHaus(f3);
             f2 = f3;
         }
@@ -171,6 +174,7 @@ public class VierSpielerFeld extends Spielfeld {
             xPosH++;
             f3 = new Feld(new Position(xPosH, yPos), FeldType.HAUS);
             f3.setEigentuemer(1);
+            f3.setNummer(i);
             f2.setHaus(f3);
             f2 = f3;
         }

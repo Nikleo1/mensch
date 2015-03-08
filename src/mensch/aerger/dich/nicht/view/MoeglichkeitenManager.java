@@ -44,14 +44,19 @@ public class MoeglichkeitenManager implements GrafikInterface {
         MenschAergerDichNicht.getFenster().getGrafikmanager().getZeichner().repaint();
     }
 
-    public void addMoeglichkeit(Position p) {
+    public void addMoeglichkeit(Position p, boolean schlagen) {
         System.out.println("Moeg");
-
+        Color c;
+        if (schlagen){
+            c = Color.pink;
+        }else{
+            c = Color.cyan;
+        }
         moeglichkeiten.put(p,
                 new Circle(MenschAergerDichNicht.getFenster().getScale() * p.getX(),
                         MenschAergerDichNicht.getFenster().getScale() * p.getY(),
                         (int) (MenschAergerDichNicht.getFenster().getScale() * 0.9),
-                        true, Color.cyan));
+                        true, c));
         MenschAergerDichNicht.getFenster().getGrafikmanager().getZeichner().repaint();
 
     }

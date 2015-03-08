@@ -23,6 +23,7 @@ public class MenschAergerDichNicht {
      */
     private static MainGUI fenster;
     private static Spielsteuerung spielSteuerung;
+    private static int sleepTime = 10;
 
     public static void setFenster(MainGUI fenster) {
         MenschAergerDichNicht.fenster = fenster;
@@ -54,5 +55,10 @@ public class MenschAergerDichNicht {
     public static MainGUI getFenster() {
         return fenster;
     }
+
+    public static int getSleepTime() {
+        return sleepTime;
+    }
+    
     
 }

@@ -14,10 +14,12 @@ public class Moeglichkeit {
     
     private Figur figur;
     private Feld feld;
+    private int gewichtung;
 
     public Moeglichkeit(Figur figur, Feld feld) {
         this.figur = figur;
         this.feld = feld;
+        this.gewichtung = 0;
     }
 
     public Figur getFigur() {
@@ -27,6 +29,17 @@ public class Moeglichkeit {
     public Feld getFeld() {
         return feld;
     }
+
+    public int getGewichtung() {
+        return gewichtung;
+    }
+
+    public void addGewichtung(int gewichtung) {
+        this.gewichtung = this.gewichtung + gewichtung;
+    }
+
+  
+    
     
     
     
