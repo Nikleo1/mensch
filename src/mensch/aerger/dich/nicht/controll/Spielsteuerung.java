@@ -103,6 +103,7 @@ public class Spielsteuerung implements Runnable {
         
         if (sf.getSpieler().get(this.istDran).hatGewonnen() && !this.gewinner.contains(sf.getSpieler().get(this.istDran))) {
             this.gewinner.add(sf.getSpieler().get(this.istDran));
+           sf.getSpieler().get(this.istDran).setFertig();
             if(this.gewinner.size() == this.sf.getSpielerZahl()){
                 JOptionPane.showMessageDialog(null, "1. " + gewinner.get(0).getName() + "\n 2. " +gewinner.get(1).getName()  + "\n 3. " +gewinner.get(2).getName());
                 MenschAergerDichNicht.getFenster().dispose();
